@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Pulse | Sign Up</title>
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent: #42C2FF;
+            --dark: #2D3748;
+            --light: #F7FAFC;
+            --success: #48BB78;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes pulse { 0%{transform:scale(1)} 50%{transform:scale(1.05)} 100%{transform:scale(1)} }
+        @keyframes float { 0%{transform:translateY(0)} 50%{transform:translateY(-15px)} 100%{transform:translateY(0)} }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            display: flex;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .graphic-side {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .graphic-side::before,
+        .graphic-side::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .graphic-side::before {
+            width: 300px; height: 300px;
+            top: -100px; right: -100px;
+        }
+
+        .graphic-side::after {
+            width: 200px; height: 200px;
+            bottom: -50px; left: -50px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-icon { font-size: 2.5rem; margin-right: 1rem; animation: pulse 2s infinite; }
+        .logo-text { font-size: 1.8rem; font-weight: 700; }
+
+        .illustration {
+            width: 80%;
+            max-width: 400px;
+            animation: float 6s infinite ease-in-out;
+            margin-bottom: 1.5rem;
+        }
+
+        .tagline { text-align: center; }
+        .tagline h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+
+        .form-side {
+            flex: 1;
+            padding: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-container {
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .form-header { text-align: center; margin-bottom: 2rem; }
+        .form-header h2 { font-size: 2rem; color: var(--dark); }
+        .form-header p { opacity: 0.7; }
+
+        .role-selection {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-option {
+            padding: 1rem;
+            border: 2px solid #EDF2F7;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .role-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(108, 99, 255, 0.05);
+        }
+
+        .role-option i { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; display: block; }
+
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #EDF2F7;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .input-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108,99,255,0.2);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .checkbox-group input {
+            margin-right: 0.75rem;
+            width: 18px; height: 18px;
+            accent-color: var(--primary);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(108,99,255,0.3); }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            opacity: 0.7;
+        }
+        .form-footer a { color: var(--primary); font-weight: 500; text-decoration: none; }
+        .form-footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            .graphic-side { padding: 1.5rem; }
+            .form-side { padding: 2rem 1.5rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Side -->
+        <div class="graphic-side">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-heartbeat"></i></div>
+                <div class="logo-text">Campus Pulse</div>
+            </div>
+            <img src="https://img.freepik.com/free-vector/students-concept-illustration_114360-8177.jpg"" alt="Campus Illustration" class="illustration">
+            <div class="tagline">
+                <h2>Join the Pulse of Your Campus</h2>
+                <p>Sign up and start your journey today</p>
+            </div>
+        </div>
+
+        <!-- Right Side -->
+        <div class="form-side">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Create Your Account</h2>
+                    <p>Be part of a community that connects and inspires</p>
+                </div>
+
+                <form id="signupForm">
+                    <div class="role-selection">
+                        <div class="role-option selected" data-role="student">
+                            <i class="fas fa-user-graduate"></i>
+                            <p>Student</p>
+                        </div>
+                        <div class="role-option" data-role="faculty">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <p>Faculty</p>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" placeholder="Alex Johnson" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="signupEmail">University Email</label>
+                        <input type="email" id="signupEmail" placeholder="student@university.edu" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="signupPassword">Create Password</label>
+                        <input type="password" id="signupPassword" placeholder="At least 8 characters" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="signupConfirmPassword">Confirm Password</label>
+                        <input type="password" id="signupConfirmPassword" placeholder="Re-enter your password" required>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="termsAgree" required>
+                        <label for="termsAgree">I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a></label>
+                    </div>
+
+                    <button type="submit" class="btn">Join Campus Pulse</button>
+
+                    <div class="form-footer">
+                        Already have an account? <a href="login.html">Login here</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.role-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.role-option').forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+            });
+        });
+    </script>
+</body>
+</html>
